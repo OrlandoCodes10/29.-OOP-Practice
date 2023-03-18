@@ -1,31 +1,65 @@
-function hex(r, g, b) {
-    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+// function hex(r, g, b) {
+//     return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+// }
+// function rgb(r, g, b) {
+//     return `rgb(${r}, ${g}, ${b})`;
+// }
+
+// //everytime we make a new object. Each color object has it's own rgb objects
+
+// // hex(255, 100, 25);
+// // rgb(255, 100, 25);
+// // "#ff6419"
+// // "rgb(255,100,25)"
+
+// function makeColor(r, g, b) {
+//     const color = {};
+//     color.r = r;
+//     color.g = g;
+//     color.b = b;
+//     color.rgb = function() {
+//         const { r, g, b } = this;
+//         return `rgb(${r}, ${g}, ${b})`;
+//     };
+//     color.hex = function() {
+//         const { r, g, b } = this;
+//         return (
+//                 '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
+//             );
+//     };
+//     return color;
+// }
+
+// const firstColor = makeColor(35, 255, 150);
+// firstColor.hex(); //firstColor.hex();
+// firstColor.rgb(); //"rgb(35, 255, 150)"
+
+// const black = makeColor(0, 0, 0);
+// black.rgb(); //"#rgb(0, 0, 0)"
+// black.hex(); //"#0000s00"
+
+// Creates a blank, plain JS object;
+// Links (sets the constructor of) this oject to another object;
+// Passes the newly created object from Step 1 as the this context;
+// Return this if the function doesn't return its own object.
+
+function Color(r, g, b) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
 }
-function rgb(r, g, b) {
+
+Color.prototype.rgb = function() {
+    const { r, g, b } = this;
     return `rgb(${r}, ${g}, ${b})`;
-}
+};
 
-// hex(255, 100, 25);
-// rgb(255, 100, 25);
-// "#ff6419"
-// "rgb(255,100,25)"
+Color.prototype.hex = function() {
+    const { r, g, b } = this;
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+};
 
-function makeColor(r, g, b) {
-    const color = {};
-    color.r = r;
-    color.g = g;
-    color.b = b;
-    color.rgb = function() {
-        const { r, g, b } = this;
-        return `rgb(${r}, ${g}, ${b})`;
-    };
-    color.hex = function() {
-        const { r, g, b } = this;
-        return (
-                '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
-            );
-    };
-    return color;
-}
+const color1 = new Color(40,50,60);
+const color2 = new Color(0,0,0);
 
-const firstColor = makeColor(35, 255, 150);
+// The secret is the new operator
