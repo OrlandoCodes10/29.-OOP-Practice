@@ -38,6 +38,7 @@
 // black.rgb(); //"#rgb(0, 0, 0)"
 // black.hex(); //"#0000s00"
 
+// The 'new' keyboard will do these things below
 // Creates a blank, plain JS object;
 // Links (sets the constructor of) this oject to another object;
 // Passes the newly created object from Step 1 as the this context;
@@ -59,7 +60,13 @@ Color.prototype.hex = function() {
     return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
-const color1 = new Color(40,50,60);
-const color2 = new Color(0,0,0);
+Color.prototype.rgba = function(a = 1.0) {
+    const { r, g ,b } = this;
+    return `rgba(${r}, ${g}, ${b}, ${a})`;
+};
 
+const color1 = new Color(40,255,60);
+color1.hex();
+const color2 = new Color(0,0,0);
+color2.hex();
 // The secret is the new operator
